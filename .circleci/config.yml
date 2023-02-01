@@ -99,7 +99,7 @@ jobs:
           keys:
             - backend-build
       # Your job code here
-      cd frontend
+      cd backend
       npm install
       npm run test
 
