@@ -1,0 +1,23 @@
+---
+- name: Add node js
+  become: true
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+
+- name: install nodejs
+  apt:
+    repo: "deb https://deb.nodesource.com/node_13.x main"
+    state: present
+    update_cache: yes
+
+- name: Install Node.js and PM2
+  become: true
+  npm:
+    name: pm2
+    global: yes
+
+- name: "add environment variables"
+  become: true
+  copy:
+    src: frontend.env.sh
+    dest: /etc/profile.d/
