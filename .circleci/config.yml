@@ -221,7 +221,7 @@ jobs:
           name: Install dependencies
           command: |
             # Your code here
-            apk add --update -y ansible
+            apk add --update --yes ansible
             pip install awscli
             # exit 1
       - run:
@@ -247,6 +247,8 @@ jobs:
             # Your code here
             cd backend
             npm install
+            apk add --update --yes ansible
+            pip install awscli
             npm run migrations > migrations_dump.txt
             # exit 1
       - run:
