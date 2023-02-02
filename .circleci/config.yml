@@ -318,9 +318,9 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-        fingerprints: ["20:5b:42:b3:cc:42:a4:79:0e:5f:cd:10:b8:34:17:7c"]
+          fingerprints: ["20:5b:42:b3:cc:42:a4:79:0e:5f:cd:10:b8:34:17:7c"]
       # attach workspace
-      attach_workspace:
+      - attach_workspace:
           at: ~/
       - run:
           name: Install dependencies
@@ -352,7 +352,7 @@ jobs:
       # Here's where you will add some code to rollback on failure
       - destroy-environment
       - revert-migrations
-      
+
 #   smoke-test:
 #     docker:
 #       # Lightweight Docker image
