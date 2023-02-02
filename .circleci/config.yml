@@ -247,7 +247,7 @@ jobs:
             # Your code here
             cd backend
             npm install
-            apk add --update --yes ansible
+            apk add --update ansible
             pip install awscli
             npm run migrations > migrations_dump.txt
             # exit 1
@@ -255,7 +255,10 @@ jobs:
           name: Send migration results to memstash
           command: |
             # Your code here
-            curl --insecure https://kvdb.io/LenSAeevv3RGZnFLitxUTC/migration_${workflow_id}  -d '1'
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+              curl --insecure https://kvdb.io/LenSAeevv3RGZnFLitxUTC/migration_${workflow_id}  -d '1'
+            fi
             # exit 1
       # Here's where you will add some code to rollback on failure
       - destroy-environment
