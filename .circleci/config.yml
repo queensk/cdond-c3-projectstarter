@@ -41,34 +41,6 @@ commands:
               #  Add revert code here. You can find this in the Getting Started section.
               # exit 1
             fi
-  install-awscli:
-    description: install aws cli
-    steps:
-      - run:
-          name: install cli
-          command: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-
-  install-ansible:
-    description: install ansible
-    steps:
-      - run:
-          name: install ansible
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y python
-            sudo apt-get install -y ansible
-
-  install_node:
-    description: install nodejs 13
-    steps:
-      - run:
-          name: install node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-            sudo apt-get install -y nodejs
 
 jobs:
   build-frontend:
@@ -314,9 +286,7 @@ jobs:
             unzip awscliv2.zip
             sudo ./aws/install
             curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
-            # - install-awscli
-            # - install-ansible
-            # - install_node
+
       - run:
           name: Get backend url
           command: |
@@ -358,10 +328,13 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            # your code here
-            - install-awscli
-            - install-ansible
-            - install_node
+            sudo apt-get update
+            sudo apt-get install -y python
+            sudo apt-get install -y ansible
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
 
       - run:
           name: Deploy backend
@@ -462,8 +435,8 @@ workflows:
           requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
