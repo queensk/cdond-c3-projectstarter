@@ -1,8 +1,6 @@
 ---
-- name: Add node js
-  become: true
-
 - name: install nodejs
+  become: true
   shell: |
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
   state: present
