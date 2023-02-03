@@ -6,7 +6,7 @@
 
 - name: install nodejs
   apt:
-    repo: "deb https://deb.nodesource.com/node_13.x main"
+    deb: "deb https://deb.nodesource.com/node_13.x main"
     state: present
     update_cache: yes
 
