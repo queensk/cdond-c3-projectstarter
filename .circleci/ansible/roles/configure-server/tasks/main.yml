@@ -1,14 +1,12 @@
 ---
 - name: Add node js
   become: true
-  shell: |
-    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 
 - name: install nodejs
-  apt:
-    repo: "deb https://deb.nodesource.com/node_13.x {{ ansible_distribution_release }} main"
-    state: present
-    update_cache: yes
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
+  state: present
+  update_cache: yes
 
 - name: Install Node.js and PM2
   become: true
