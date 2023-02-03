@@ -44,7 +44,7 @@ commands:
   install-awscli:
     description: install aws cli
     steps:
-      run:
+      - run:
         name: install cli
         command: |
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -54,7 +54,7 @@ commands:
   install-ansible:
     description: install ansible
     steps:
-      run:
+      - run:
         name: install ansible
         command: |
           sudo apt-get update
@@ -64,7 +64,7 @@ commands:
   install_node:
     description: install nodejs 13
     steps:
-      run:
+      - run:
         name: install node
         command: |
           curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
