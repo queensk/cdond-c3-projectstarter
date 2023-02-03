@@ -307,8 +307,15 @@ jobs:
           name: Install dependencies
           command: |
             # your code here
-            - install-awscli
-            - install-ansible
+            sudo apt-get update
+            sudo apt-get install -y python
+            sudo apt-get install -y ansible
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
+            # - install-awscli
+            # - install-ansible
             # - install_node
       - run:
           name: Get backend url
@@ -455,8 +462,8 @@ workflows:
           requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
+      # - deploy-backend:
+      #     requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
