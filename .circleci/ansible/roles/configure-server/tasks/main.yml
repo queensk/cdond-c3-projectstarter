@@ -1,5 +1,5 @@
 ---
-- name: install nodejs
+- name: Install nodejs
   become: true
   shell: |
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
@@ -10,7 +10,7 @@
     name: pm2
     global: yes
 
-- name: "add environment variables"
+- name: Add environment variables
   become: true
   copy:
     src: frontend.env.sh
