@@ -243,6 +243,11 @@ jobs:
       # Checkout code from git
       - checkout
       - run:
+          name: Install AWS CLI
+          command: |
+            apt-get update
+            apt-get install -y awscli
+      - run:
           name: Run migrations
           command: |
             # Your code here
