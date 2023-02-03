@@ -3,8 +3,6 @@
   become: true
   shell: |
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
-  state: present
-  update_cache: yes
 
 - name: Install Node.js and PM2
   become: true
