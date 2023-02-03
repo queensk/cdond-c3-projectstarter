@@ -248,8 +248,6 @@ jobs:
             # Your code here
             cd backend
             npm install
-            apk add --update ansible
-            pip install awscli
             npm run migrations > migrations_dump.txt
             # exit 1
       - run:
