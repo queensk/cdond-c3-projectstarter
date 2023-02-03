@@ -309,7 +309,7 @@ jobs:
             # your code here
             - install-awscli
             - install-ansible
-            - install_node
+            # - install_node
       - run:
           name: Get backend url
           command: |
