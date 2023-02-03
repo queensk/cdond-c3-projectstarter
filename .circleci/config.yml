@@ -280,20 +280,18 @@ jobs:
           command: |
             # your code here
             sudo apt-get update
-            sudo apt-get install -y software-properties-common
-            sudo apt-add-repository --yes --update ppa:ansible/ansible
+            sudo apt-get install -y python
             sudo apt-get install -y ansible
             curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo apt-get install -y npm
-            sudo npm install -g aws-cli
       - run:
           name: Get backend url
           command: |
             # your code here
             export BACKEND_IP=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters Name=tag:Name,Values=backend-${workflow_id} Name=instance-state-name,Values=running \
+              --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} Name=instance-state-name,Values=running \
               --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
@@ -330,13 +328,12 @@ jobs:
           command: |
             # your code here
             sudo apt-get update
-            sudo apt-get install -y software-properties-common
-            sudo apt-add-repository --yes --update ppa:ansible/ansible
+            sudo apt-get install -y python
             sudo apt-get install -y ansible
             curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo apt-get install -y npm
-            sudo npm install -g aws-cli
+            sudo apt-get install -y awscli
 
       - run:
           name: Deploy backend
