@@ -3,10 +3,11 @@
   become: true
   shell: |
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-
+  vars:
+    NODEJS_VERSION: "13"
 - name: install nodejs
   apt:
-    deb: "deb https://deb.nodesource.com/node_13.x main"
+    repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
     state: present
     update_cache: yes
 
