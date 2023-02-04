@@ -420,15 +420,26 @@ jobs:
       # Checkout code from git
       - checkout
       - run:
-          name: Install dependencies
+          name: get old workflow id
           command: |
             # your code here
-
+            export OldWorkflowID=$(aws cloudformation \
+              list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+              --no-paginate --output text)
+            echo "Old Workflow Id: ${OldWorkflowID}"
+            curl https://kvdb.io/LenSAeevv3RGZnFLitxUTC/old_workflow_id  -d '{OldWorkflowID}'
       - run:
           name: Update cloudfront distribution
           command: |
             # your code here
+            aws cloudformation deploy \
+              --template-file .circleci/files/cloudfront.yml \
+              --stack-name InitialStack \
+              --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople
       # Here's where you will add some code to rollback on failure
+      - destroy-environment
+      - revert-migrations
 
 # cleanup:
 #   docker:
