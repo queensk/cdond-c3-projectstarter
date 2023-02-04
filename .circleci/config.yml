@@ -426,6 +426,10 @@ jobs:
       # Checkout code from git
       - checkout
       - run:
+          name: Install dependencies
+          command: |
+          curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
+      - run:
           name: get old workflow id
           command: |
             # your code here
