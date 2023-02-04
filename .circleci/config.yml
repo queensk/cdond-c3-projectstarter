@@ -14,7 +14,7 @@ commands:
           when: on_fail
           command: |
             # Your code here
-            aws cloudformation delete-stack --stack-name udapeople-backend-$<<parameters.workflow_id>>
+            aws cloudformation delete-stack --stack-name udapeople-backend-<<parameters.workflow_id>>
             aws cloudformation delete-stack --stack-name udapeople-frontend-<<parameters.workflow_id>>
             aws s3 rb s3://udapeople-<<parameters.workflow_id>> --force
             # exit 1
@@ -494,7 +494,7 @@ workflows:
           requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      # - cloudfront-update:
-      #     requires: [smoke-test]
+      - cloudfront-update:
+          requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
