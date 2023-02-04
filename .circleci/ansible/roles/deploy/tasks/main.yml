@@ -1,0 +1,27 @@
+---
+- name: "copy backend folder"
+  become: true
+  copy:
+    src: /root/project/backend.tar
+    dest: /home/ubuntu/
+
+- name: "un tar"
+  become: true
+  shell: |
+    tar -xvf backend.tar
+- name: "install node dependencies"
+  become: true
+  shell: |
+    cd backend/
+    npm i
+- name: "build"
+  become: true
+  shell: |
+    cd backend/
+    npm run build
+
+- name: "start"
+  become: true
+  shell: |
+    cd backend/
+    pm2 start npm --name backend -- start
