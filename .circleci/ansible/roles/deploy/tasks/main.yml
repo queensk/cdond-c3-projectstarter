@@ -2,13 +2,12 @@
 - name: "copy backend folder"
   become: true
   copy:
-    src: artifact.tar.gz
-    dest: ~/backend
+    src: ~/project/artifact.tar.gz
+    dest: /home/ubuntu/
 
 - name: "un tar"
   become: true
   shell: |
-    cd backend/
     tar -xzvf artifact.tar.gz
 - name: "install node dependencies"
   become: true
