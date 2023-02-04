@@ -14,9 +14,9 @@ commands:
           when: on_fail
           command: |
             # Your code here
-            aws cloudformation delete-stack --stack-name UdaPeople-backend-<<parameters.workflow_id>>
-            aws cloudformation delete-stack --stack-name UdaPeople-frontend-<<parameters.workflow_id>>
-            aws s3 rb s3://UdaPeople-<<parameters.workflow_id>> --force
+            aws cloudformation delete-stack --stack-name udapeople-backend-$<<parameters.workflow_id>>
+            aws cloudformation delete-stack --stack-name udapeople-frontend-<<parameters.workflow_id>>
+            aws s3 rb s3://udapeople-<<parameters.workflow_id>> --force
             # exit 1
 
   revert-migrations:
