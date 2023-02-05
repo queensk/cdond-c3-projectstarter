@@ -421,14 +421,17 @@ jobs:
   cloudfront-update:
     docker:
       # Docker image here that supports AWS CLI
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
       # Checkout code from git
       - checkout
       - run:
           name: Install dependencies
           command: |
-            curl -sL https://deb.nodesource.com/setup_13.x | bash - && apt-get install -y nodejs
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && sudo apt-get install -y nodejs
       - run:
           name: get old workflow id
           command: |
