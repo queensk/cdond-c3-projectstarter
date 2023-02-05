@@ -1,0 +1,14 @@
+GitHub repository
+https://github.com/queensk/cdond-c3-projectstarter.git
+
+S3 Bucket
+http://udapeople-dd1d091.s3-website-us-east-1.amazonaws.com
+
+Prometheus
+http://ec2-54-144-251-29.compute-1.amazonaws.com:9090/
+
+backend endpoint
+http://100.26.253.55:3030/api/status
+
+cloudefront 
+dwlk4i7tfz0yv.cloudfront.net
